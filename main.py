@@ -3,6 +3,7 @@ import requests
 import threading
 import json
 import time
+import os
 
 
 # --- 核心邏輯區 ---
@@ -492,4 +493,14 @@ def main(page: ft.Page):
     )
 
 
-ft.app(target=main)
+if __name__ == "__main__":
+    # Get the PORT from Render, default to 8080 if running locally
+    port = int(os.environ.get("PORT", 8080))
+
+    # Start the app in Web Mode
+    ft.app(
+        target=main,
+        view=ft.WEB_BROWSER,
+        port=port,
+        host="0.0.0.0",
+    )
